@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
+from typing import Annotated
 from sqlalchemy.orm import Session
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, APIRouter
 from fastapi.security import OAuth2PasswordBearer
-import crud, schemas, database
+from database import get_db
+import crud, schemas
 
 SECRET_KEY = "your_secret_key"
 ALGORITHM = "HS256"
@@ -17,7 +19,7 @@ def create_access_token(data: dict):
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(database.SessionLocal)):
+def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
