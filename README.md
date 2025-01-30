@@ -8,7 +8,7 @@ It provides secure endpoints to create, read, and delete users while ensuring au
 - **User Registration** (hashed passwords stored securely)
 - **JWT-based Authentication** (login and token generation)
 - **Protected CRUD Operations** (only authenticated users can access them)
-- **SQLAlchemy & PostgreSQL** for database management
+- **SQLAlchemy & SQLite** for database management
 - **Pydantic for Data Validation**
 
 ## 🛠️ Tech Stack
@@ -39,8 +39,8 @@ It provides secure endpoints to create, read, and delete users while ensuring au
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/your-repo/fastapi-jwt-auth
-cd fastapi-jwt-auth
+git clone https://github.com/ProgHubs_JWT_02
+cd ProgHubs_JWT_02
 ```
 
 ### 2️⃣ Create a Virtual Environment
@@ -55,7 +55,7 @@ pip install -r requirements.txt
 ```
 
 ### 4️⃣ Configure the Database
-Modify `database.py` to set up your **PostgreSQL** or **SQLite** database.
+Modify `database.py` to set up your **SQLite** database.
 
 ### 5️⃣ Run the Application
 ```bash
