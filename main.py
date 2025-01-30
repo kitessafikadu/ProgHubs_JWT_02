@@ -12,7 +12,9 @@ app = FastAPI()
 @app.post("/token", response_model=dict)
 def login(db: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()):
     user = crud.get_user_by_email(db, email=form_data.username)
-    if not user or not auth.pwd_context.verify(form_data.password, user.hashed_password):
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    if not crud.pwd_context.verify(form_data.password, user.hashed_password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
     token = auth.create_access_token(data={"sub": str(user.id)})
     return {"access_token": token, "token_type": "bearer"}
